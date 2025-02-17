@@ -1,0 +1,49 @@
+{% set only_media = true %}
+{% set only_text = true %}
+
+{% for section in sections %}
+    {% if section.type == 'text' or section.type == 'title' %}
+        {% set only_media = false %}
+    {% elseif section.type == 'image' or section.type == 'video' %}
+        {% set only_text = false %}
+    {% endif %}
+{% endfor %}
+
+<div {{anchor_id}} class="{{classname}} {% if only_media %}only-media{% endif %} {% if only_text %}only-text{% endif %} bg-{{background}}" data-num="{{sections|length}}">
+    <div class="wrapper" >
+        {% for section in sections %}
+            <div class="section type-{{section.type}}">
+                {% if section.type == 'video' %}
+                    <div class="media">
+                        <video autoplay muted poster="{{section.video_poster.src}}" alt="{{section.video_poster.alt}}">
+                            <source src="{{ section.video.url }}" type="video/mp4">
+                            Sorry! your browser does not support the video tag.
+                        </video>
+                    </div>
+                {% elseif section.type == 'image' %}
+                    <div class="media">
+                        <img src="{{ section.image.src }}" srcset="{{section.image.srcset}}" alt="{{ section.image.alt }}">
+                    </div>
+                {% elseif section.type == 'text' %}
+                    <div class="content">{{ section.text }}</div>
+                    {% if section.ctas|length > 0 %}
+                        <div class="ctas">
+                            {% for cta in section.ctas %}
+                                <a href="{{ cta.cta.url }}" class="cta">{{ cta.cta.title }}</a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% elseif section.type == 'title' %}
+                    <h2>{{ section.title }}</h2>
+                    {% if section.ctas|length > 0 %}
+                        <div class="ctas">
+                            {% for cta in section.ctas %}
+                                <a href="{{ cta.cta.url }}" class="cta">{{ cta.cta.title }}</a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>

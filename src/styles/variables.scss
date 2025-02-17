@@ -1,0 +1,42 @@
+:root {
+    --header-height: 82px;
+    --header-height-collapsed: 75px;
+    --header-offset: 0px;
+    --container-padding: 20px;
+    --container-width: calc(min(1320px, 100vw - (2 * var(--container-padding))));
+    --container-xl-max-width: calc(min(1920px, 100vw - (2 * var(--container-padding))));
+    --full-height: 100vh;
+
+    // Typography
+
+    --type-h1: var(--type-desktop-h1);
+    --type-h2: var(--type-desktop-h2);
+    --type-h3: var(--type-desktop-h3);
+    --type-b1: var(--type-desktop-b1);
+    --type-b2: var(--type-desktop-b2);
+    --type-b3: var(--type-desktop-b3);
+    --type-b4: var(--type-desktop-b4);
+
+
+    @include on-tablet {
+        --header-height: 88px;
+        --header-height-collapsed: 88px;
+        --container-padding: var(--spacing-sm);
+    }
+    
+
+
+    @include on-mobile {
+
+        // Typography
+        --type-h1: var(--type-mobile-h1);
+        --type-h2: var(--type-mobile-h2);
+        --type-h3: var(--type-mobile-h3);
+        --type-b1: var(--type-mobile-b1);
+        --type-b2: var(--type-mobile-b2);
+        --type-b3: var(--type-mobile-b3);
+        --type-b4: var(--type-mobile-b4);
+    }
+
+}
+

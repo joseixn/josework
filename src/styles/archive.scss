@@ -1,0 +1,92 @@
+@import 'mixins';
+
+body.archive {
+    main#content {
+        display: flex;
+        justify-content: center;
+        padding: var(--spacing-md) 0;
+
+        .wrapper {
+            max-width: var(--container-width);
+            width: 100%;
+
+            .filter {
+                width: 100%;
+                margin-bottom: var(--spacing-md);
+                display: flex;
+                align-items: start;
+                gap: var(--spacing-sm);
+                .tags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    a {
+                        @include button-outline;
+                        font: var(--type-b4);
+                        padding: 6px 20px;
+                        @include termColor;
+                        transition: background 0.3s, border-color 0.3s, color 0.3s;
+                        &:hover, &.active {
+                            background: var(--term-color);
+                            border-color: var(--term-color);
+                            color: var(--term-color-text);
+                        }
+                    }
+                }
+                .mode-selector {
+                    display: flex;
+                    a.mode {
+                        @include button-outline;
+                        font: var(--type-b4);
+                        padding: 6px 20px;
+                        &:first-child {
+                            border-radius: var(--radius-small) 0 0 var(--radius-small);
+                            border-right: none;
+                        }
+                        &:last-child {
+                            border-radius: 0 var(--radius-small) var(--radius-small) 0;
+                            border-left: none;
+                        }
+                        &.active, &:hover {
+                            background: var(--color-surface-dark);
+                            color: var(--color-text-secondary);
+                        }
+                    }
+                }
+            }
+            .posts-holder {
+                display:flex;
+                align-items: start;
+                gap: var(--spacing-smd);
+                .posts {
+                    position: relative;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: var(--spacing-sm);
+                    .post {
+                        @include post-tease-mini-directory;
+                        width: calc((100% - var(--spacing-sm)*3) / 4);
+                        .date {
+                            display:none;
+                        }
+                    }
+                }
+                &:has(.map){
+                    .map {
+                        width: 66%;
+                        aspect-ratio: 1/1;
+                    }
+                    .posts {
+                        width: 33%;
+                        overflow-y: scroll;
+                        height: calc(var(--container-width) * 0.66);
+                        .post {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+           
+        }
+    }
+}

@@ -1,0 +1,42 @@
+meta:
+  name: tlb/hero
+  title: Hero
+  description: A block that shows a video or image at the top of a page.
+  acf:
+    mode: edit
+  dynamic: true
+  supports:
+    anchor: true
+fields:
+  type:
+    label: Media Type
+    type: select
+    choices:
+      image: Image
+      video: Video
+
+  video:
+    label: Video
+    type: file
+    mime_types: 'mov,mp4'
+    conditional_logic:
+      -
+        - field: field_hero_type
+          operator: ==
+          value: video
+  video_poster:
+    label: Video Poster Image
+    type: image
+    conditional_logic:
+      -
+        - field: field_hero_type
+          operator: ==
+          value: video
+  image:
+    label: Image
+    type: image
+    conditional_logic:
+      -
+        - field: field_hero_type
+          operator: ==
+          value: image

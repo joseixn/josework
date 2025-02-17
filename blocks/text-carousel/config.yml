@@ -1,0 +1,9 @@
+fields:
+  text:
+    fields:
+      quote:
+        type: textarea
+      quote_company:
+        label: Author Role
+        type: text
+        instructions: The role of the author

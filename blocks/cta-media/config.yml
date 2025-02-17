@@ -1,0 +1,119 @@
+meta:
+  name: tlb/cta-media
+  title: CTA Media
+  description: A block that shows a CTA, some text and an image or video
+  acf:
+    mode: edit
+  dynamic: true
+  supports:
+    anchor: true
+title: CTA Media - $field_cta_media_title
+fields:
+  conf:
+    type: group
+    layout: table
+    label: Style
+    fields:
+      background:
+        label: Background
+        type: select
+        conditional_logic:
+          -
+            - field: field_cta_media_conf_layout
+              operator: "!="
+              value: fill_full
+        choices:
+          white: White
+          dark: Dark
+          green: Green
+          mid-green: Mid Green
+          off-white: Off-White
+          yellow: Yellow
+        default_value: white
+      layout:
+        label: Layout
+        type: select
+        choices:
+          default: Default
+          fill: Fill half (media only)
+          fill_full: Fill full (media only)
+      hover_mask:
+        label: Hover Mask
+        type: select
+        choices:
+          none: None
+          london_bridge: London Bridge Lock Up
+          arch: Arch
+          shield: Shield
+        default_value: none
+        conditional_logic:
+          -
+            - field: field_cta_media_conf_layout
+              operator: "=="
+              value: default
+  type:
+    label: Media Type
+    type: select
+    choices:
+      image: Image
+      video: Video
+      text: Text Only
+  
+  heading: 
+    label: Heading
+    type: text
+  
+  title:
+    label: Title
+    type: text
+
+  text:
+    label: Text
+    type: wysiwyg
+  
+  ctas:
+    type: repeater
+    label: CTAs
+    layout: table
+    fields:
+      cta:
+        label: CTA
+        type: link
+  
+
+  video:
+    label: Video
+    type: file
+    mime_types: 'mov,mp4'
+    conditional_logic:
+      -
+        - field: field_cta_media_type
+          operator: ==
+          value: video
+  video_poster:
+    label: Video Poster Image
+    type: image
+    conditional_logic:
+      -
+        - field: field_cta_media_type
+          operator: ==
+          value: video
+  image:
+    label: Image
+    type: image
+    conditional_logic:
+      -
+        - field: field_cta_media_type
+          operator: ==
+          value: image
+
+  hover_mask_words:
+    label: Hover Mask Words
+    type: text
+    conditional_logic:
+      -
+        - field: field_cta_media_conf_hover_mask
+          operator: "!="
+          value: none
+  
+      

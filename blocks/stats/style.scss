@@ -1,0 +1,83 @@
+.block__anatomy-stats {
+    display: flex;
+    justify-content: center;
+    background: var(--color-surface-highlight);
+    padding: var(--spacing-lg) 0;
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: var(--container-width);
+        width: 100%;
+        
+        h2 {
+            font: var(--type-h2);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+        .stats-outer {
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+
+            .btn {
+                background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1IiBmaWxsPSJub25lIj4KICA8cGF0aCBkPSJNMTIuNzg1OCAxNy44ODY4TDguNDgxMDQgMTMuNTgyMUwxOC4wOTMyIDEzLjU4MjFWMTEuNTc2Nkw4LjQ4MTA0IDExLjU3NjZMMTIuNzg1OCA3LjI3MTg3TDExLjM2NzkgNS44NTRMNC42NDI1OCAxMi41NzkzTDExLjM2NzkgMTkuMzA0N0wxMi43ODU4IDE3Ljg4NjhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=');
+                width: 56px;
+                height: 56px;
+                background-size: 25px 25px;
+                background-repeat: no-repeat;
+                background-position: center;
+                font-size:0;
+                border:none;
+                border-radius: 50%;
+                background-color: var(--color-surface-secondary);
+                transition: background-color 0.3s, filter 0.3s;
+                &:hover {
+                    background-color: black;
+                    filter: invert(1);
+                }
+
+                &.btn-next {
+                    transform: rotate(180deg);
+                }
+            }
+            
+            .stats-holder {
+                overflow-x: hidden;
+                position: relative;
+                .stats { 
+                    width: fit-content;
+                    display: flex;
+                    .stat {
+                        padding: var(--spacing-md)  60px;
+                        background: var(--color-surface-secondary);
+                        border-radius: var(--radius-medium);
+                        color: var(--color-text-secondary);
+                        margin-right: var(--spacing-sm);
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        gap: var(--spacing-smd);
+                        min-width: 0;
+        
+                        .number {
+                            font: var(--type-h1);
+                            font-size: 128px;
+                            line-height: 120px;
+                            letter-spacing: -8.96px;
+                            text-transform: uppercase;
+                            white-space: nowrap; /* Ensures .stat does not break */
+                        }
+                        .label {
+                            font: var(--type-b2);
+                            min-width: 140px;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}

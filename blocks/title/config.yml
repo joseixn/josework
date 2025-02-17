@@ -1,0 +1,17 @@
+fields:
+  title:
+    type: text
+    label: Section Heading
+  subtitle:
+    type: text
+    label: Title
+  text:
+    type: textarea
+    label: Text
+  text_align: 
+    type: select
+    label: Text Alignment
+    default: center
+    choices:
+      left: Left
+      center: Center

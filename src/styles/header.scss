@@ -1,0 +1,120 @@
+@import "mixins";
+
+header {
+    position: fixed;
+    z-index:1000;
+    top:0;
+    left:0;
+
+    width: 100%;
+
+    .message {
+        padding: var(--spacing-sm);
+        background: var(--color-surface-highlight);
+        text-align: center;
+        .message-cta {
+            @include button-outline;
+        }
+    }
+
+    .main-header {
+        background: var(--color-surface-tertiary);
+        display: flex;
+        justify-content: center;
+
+        .wrapper {
+            padding: 20px 0;
+            max-width: var(--container-width);
+            width:100%;
+            display: flex;
+            position: relative;
+
+            .hdr-logo {
+                font-size:0;
+            }
+
+            .nav-holder {
+                left:50%;
+                position: absolute;
+                transform: translateX(-50%);
+                // overflow: hidden;
+                > nav > ul {
+                    display: flex;
+
+                    ul {
+                        display: none;
+                    }
+
+                    
+
+                    li {
+
+                        &.current-menu-parent, &.menu-item-has-children:hover {
+                            > ul {
+                                display: flex;
+                                position: absolute;
+                                top: calc(var(--header-height) - 20px - 10px - 12px);
+                                
+                                left:50%;
+                                width: 100vw;
+                                transform: translateX(-50%);
+                                padding: 0;
+
+                                padding-top: 12px;
+                                padding-bottom: var(--spacing-xs);
+                                justify-content: center;
+                                background: var(--color-surface-tertiary);
+                                gap: 48px;
+
+                                li {
+                                    font: var(--type-b3);
+                                    padding: var(--spacing-xs) 0;
+                                    &:hover, &.current-menu-item {
+                                        text-decoration: underline;
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                        a:not(.menu-item-has-children > ul > li > a) {
+                            @include button;
+                            padding-top: 8px;
+                            padding-bottom: 8px;
+                            
+                        }
+                        &.current-menu-item, &.current-menu-parent {
+                            a:not(.current-menu-parent > ul > li > a) {
+                                @include button-active;
+                            }
+                        }
+                        
+                    } 
+
+                }
+            }
+
+            .ancillary-links {
+                margin-left:auto;
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-sm);
+                .at-london-bridge-link {
+                    width: 40px;
+                    height: 42px;
+                    background: var(--icons-at-london-bridge) no-repeat center center;
+                    font-size:0;
+                    display: block;
+                }
+                .search-link {
+                    width: 40px;
+                    height: 40px;
+                    background: var(--icons-search) no-repeat center center;
+                    font-size:0;
+                    display: block;
+                }
+            }
+        }
+    }
+
+}

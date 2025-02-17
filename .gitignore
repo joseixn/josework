@@ -1,0 +1,7 @@
+/assets/styles/
+/assets/scripts/
+*.css
+!/style.css
+/node_modules
+package-lock.json
+!/assets/fonts/stylesheet.css

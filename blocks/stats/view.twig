@@ -1,0 +1,20 @@
+<div {{anchor_id}} class="{{classname}}">
+    <div class="wrapper">
+        <h2>{{title}}</h2>
+        <div class="stats-outer">
+            <button class="btn btn-prev">Prev</button>
+            <div class="stats-holder">
+                <div class="stats">
+                    {% for stat in stats %}
+                        <div class="stat">
+                            <div class="number">{{stat.stat}}</div>
+                            <div class="label">{{stat.label}}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <button class="btn btn-next">Next</button>
+        </div>
+
+    </div>
+</div>

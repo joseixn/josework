@@ -1,0 +1,12 @@
+meta:
+  include:
+    js:
+      - gsap.min.js
+      - ScrollToPlugin.min.js
+
+fields:
+  title:
+    label: Title
+    type: text
+    default: Stats
+    instructions: The title of the block

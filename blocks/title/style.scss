@@ -1,0 +1,40 @@
+.block__anatomy-title {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-lg) 0;
+
+    .wrapper {
+        max-width: var(--container-width);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3 {
+            font: var(--type-b3);
+            max-width: 1000px;
+            margin-bottom: var(--spacing-sm);
+        }
+        h2 {
+            font: var(--type-h1);
+            max-width: 1000px;
+            margin-bottom: var(--spacing-md);
+        }
+        p {
+            font: var(--type-b2);
+            max-width: 800px;
+        }
+    }
+
+    &.text-align-left {
+        .wrapper {
+            align-items: start;
+            text-align: left;
+        }
+    }
+    &.text-align-center {
+        .wrapper {
+            text-align: center;
+        }
+    }
+}

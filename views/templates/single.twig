@@ -1,0 +1,68 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    {% if not post.is_remote %}
+        {% set fields = fn('get_fields', post.ID) %}
+    {% endif %}
+    <article class="post-type-{{ post.type }}" id="post-{{ post.id }}">
+        <section class="article-top">
+            <div class="left">
+                <div class="tags">
+                    {% if post.type == 'directory' %}
+                        {% for term in post.terms %}
+                            <a class="term-{{ term.slug }} taxonomy-{{ term.taxonomy }}" href="{{ term.link }}">{{ term.name }}</a>
+                        {% endfor %}
+                    {% elseif post.type == "offer" %}
+                        <a href="/dealcard" class="not-term">Offer</a>
+                    {% else %}  
+                        <a href="/events" class="not-term">Event</a>
+                    {% endif %}
+                </div>
+                {% if post.type == 'events' %}
+                    <div class="event-dates">
+                        {% if fields.from %}
+                            <span class="from">{{fields.from|date("j F Y")}}</span>{% if fields.to and fields.to != fields.from %} – <span class="to">{{fields.to|date("j F Y")}}</span>{% endif %}
+                        {% else %}
+                            <span class="from">{{post.startDate|date("j F Y")}}</span>{% if post.endDate and post.endDate != post.startDate %} – <span class="to">{{post.endDate|date("j F Y")}}</span>{% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="share-icons">
+                <span>Share:</span>
+                <a class="share-all" href="#" title="Share">
+                    Share
+                </a>
+                <a class="share-x" href="https://x.com/intent/tweet?url={{ current_url }}" target="_blank" rel="noopener noreferrer" title="Share on Twitter">
+                    Share on X
+                </a>
+                <a class="share-linked-in" href="https://www.linkedin.com/shareArticle?mini=true&url={{ current_url }}" target="_blank" rel="noopener noreferrer" title="Share on LinkedIn">
+                    Share on LinkedIn
+                </a>
+            </div>
+        </section>
+        <section class="titles">
+            <h1>{{ post.title }}</h1>
+            <p>{{post.excerpt({read_more:''}) ?: post.excerpt }}</p>
+        </section>
+        <section class="article-content">
+            <div class="media">
+                <img src="{{ post.thumbnail }}" srcset="{{ post.thumbnail.srcset }}" alt="{{ post.title }}">
+            </div>
+            <div class="article-body">
+                {{ post.content }}
+                {% if post.website or fields.website %}
+                    <a href="{{post.website ?: fields.website}}" class="find-out-more" target="_blank" rel="noopener noreferrer">Find out more</a>
+                {% endif %}
+            </div>
+        </section>
+        {% if post.type == 'directory' %}
+            <section class="map" {% if fields.location %}
+                data-lat="{{fields.location.lat}}" data-lng="{{fields.location.lng}}"
+            {% else %}
+                data-lat="{{post.location.getLatitude()}}" data-lng="{{post.location.getLongitude()}}"
+            {% endif %}>
+            </section>
+        {% endif %}
+    </article>
+{% endblock %}

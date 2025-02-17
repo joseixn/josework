@@ -1,0 +1,46 @@
+{% set tag = post.link ? 'a' : 'div' %}
+{% if not post.is_remote %}
+    {% set fields = fn('get_fields', post.ID) %}
+{% endif %}
+<div class="post type-{{post.type}} {% for term in post.terms %} term-{{term.taxonomy}}-{{term.slug}}{% endfor %} {% if post.thumbnail %}has-thumb{% endif %}"  {% for key,value in data %}data-{{key}}="{{value|e}}"{% endfor %} data-id="{{post.id}}" {% if fields.location %}
+    data-lat="{{fields.location.lat}}" data-lng="{{fields.location.lng}}"
+{% else %}
+    data-lat="{{post.location.getLatitude()}}" data-lng="{{post.location.getLongitude()}}"
+{% endif %}>
+    {% if post.link %}<a class="media" href="{{ post.link.url|default(post.link) }}">
+    {% else %}<div class="media">
+    {% endif %}
+    {% if index %}<span class="index">{{index}}</span>{% endif %}
+     <img src="{{ post.thumbnail }}" srcset="{{ post.thumbnail.srcset }}" alt="{{ post.title }}">
+    {% if post.link %}</a>
+    {% else %}</div>
+    {% endif %}
+    <div class="info">
+        {% set _from = fields.from ?: post.startDate %}
+        {% set _to = fields.to ?: post.endDate %}
+        <div class="date">{% if _from %}
+            <span class="date-full">{{_from|date("l j F Y")}}</span>
+            <span class="date-compact">{{_from|date("j M Y")}}</span>
+            {% if _to and _to != _from %}
+                - <span class="date-full">{{_to|date("l j F Y")}}</span>
+                  <span class="date-compact">{{_to|date("j M Y")}}</span>
+            {% endif %}
+        {% else %}
+            <span class="date-full">{{fields.date|date("l j F Y")}}</span>
+            <span class="date-compact">{{post.date|date("j M Y")}}</span>
+        {% endif %}</div>
+        <div class="tags">{% for term in post.terms %}
+            <a class="term-{{term.slug}} taxonomy-{{term.taxonomy}}" href="{{term.link}}">{{term.name}}</a>
+        {% endfor %}</div>
+        {% if post.link %}<a href="{{ post.link.url|default(post.link) }}">{% endif %}
+        <div class="posttype">{{post.type}}</div>
+        {% if post.link %}</a>{% endif %}
+        {% if post.link %}<a href="{{ post.link.url|default(post.link) }}">{% endif %}
+        <h4>{{ post.title }}</h4>
+        {% if post.link %}</a>{% endif %}
+        {% if post.link %}<a href="{{ post.link.url|default(post.link) }}">{% endif %}
+        <p>{{ post.excerpt({read_more:''}) ?: post.excerpt }}</p>
+        {% if post.link %}</a>{% endif %}
+        
+    </div>
+</div>

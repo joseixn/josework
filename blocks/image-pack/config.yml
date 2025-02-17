@@ -1,0 +1,82 @@
+meta:
+  name: tlb/image-pack
+  title: Image (or Video) Pack
+  description: A block that shows multiple images or videos with title and text underneath.
+  acf:
+    mode: edit
+  dynamic: true
+  supports:
+    anchor: true
+fields:
+  show_cta:
+    type: true_false
+    label: Show link as CTA
+    default: true
+
+  background:
+    label: Background
+    type: select
+    choices:
+      white: White
+      dark: Dark
+      green: Green
+      off-white: Off-White
+    default_value: white
+
+  heading:
+    type: text
+    label: Heading
+  
+  title:
+    type: text
+    label: Title
+  
+  items:
+    type: repeater
+    label: Items
+    layout: row
+    min: 2
+    max: 4
+    fields:
+      link:
+        type: link
+        label: Link
+      type:
+        label: Media Type
+        type: select
+        choices:
+          image: Image
+          video: Video
+      video:
+        label: Video
+        type: file
+        mime_types: 'mov,mp4'
+        conditional_logic:
+          -
+            - field: field_image_pack_items_type
+              operator: ==
+              value: video
+      video_poster:
+        label: Video Poster Image
+        type: image
+        conditional_logic:
+          -
+            - field: field_image_pack_items_type
+              operator: ==
+              value: video
+      image:
+        label: Image
+        type: image
+        conditional_logic:
+          -
+            - field: field_image_pack_items_type
+              operator: ==
+              value: image
+
+      title: 
+        type: text
+        label: Title
+      
+      text:
+        type: textarea
+        label: Text

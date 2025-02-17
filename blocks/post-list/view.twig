@@ -1,0 +1,45 @@
+<div {{anchor_id}} class="{{classname}} layout-{{layout}} bg-{{background}}" data-post-type="{{post_type|join(',')}}" data-per-page="{{posts_per_page}}">
+    <div class="wrapper">
+        <div class="top align-{{heading_text_direction}}">
+            <div class="texts">
+                <h3>{{heading}}</h3>
+                <h2>{{title}}</h2>
+                <p>{{description}}</p>
+            </div>
+            {% if cta and heading_text_direction=='left' %}<a href="{{cta.link}}" class="cta">{{cta.title}}</a>{% endif %}
+        </div>
+        <div class="taxonomies">
+            {% if post_type.0 == 'events' %}
+                <div class="events-type-picker">
+                    <ul>
+                        <li class="active" aria-role="button" data-filter="all">All</li>
+                        <li aria-role="button" data-filter="local">Team London Bridge</li>
+                        <li aria-role="button" data-filter="remote">At London Bridge</li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="taxonomy" >
+                    <ul>
+                        {% for term in fn(["Timber", "get_terms"], {taxonomy: taxonomy}) %}
+                            <li>
+                                <a href="{{term.url}}" class="term" data-taxonomy="{{taxonomy}}" data-term-slug="{{term.slug}}" data-term-id="{{term.id}}">{{term.name}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+        </div>
+        <div class="posts">
+            {% for post in resolved_posts %}
+                {% include 'partials/tease.twig' %}
+            {% endfor %}
+        </div>
+        {% if resolved_posts.pagination.total > 1 %}
+            <div class="load-more" role="button" aria-label="Load more posts">{{load_more_text}}</div>
+        {% endif %}
+        {% if cta and heading_text_direction != 'left' %}<div class="cta-holder">
+            <a href="{{cta.link}}" class="cta-end">{{cta.title}}</a>
+        </div>{% endif %}
+    </div>
+</div>

@@ -1,0 +1,98 @@
+@import 'mixins';
+
+.block__tlb-footer-cta {
+    background: var(--color-surface-secondary);
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    .media {
+        position: absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        &:after {
+            content: '';
+            position: absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%);
+        }
+
+        img, video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    .wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        max-width: var(--container-width);
+        width: 100%;
+        padding: var(--spacing-lg) 0;
+        text-align: center;
+        z-index:1;
+
+        .logo-set {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .cta {
+            font: var(--type-h3);
+            color: var(--color-text-highlight);
+            border: 1px solid var(--color-border-highlight);
+            padding: 10.5px 32px;
+            border-radius: var(--radius-small);
+        }
+
+        a.link {
+            display: flex;
+            gap: var(--spacing-sm);
+
+            .link-text {
+                align-self: start;
+                font: var(--type-h3);
+                
+                padding: 10.5px 32px;
+                background: var(--color-surface-highlight);
+                border-radius: var(--radius-small);
+                transition: background 0.3s;
+            }
+
+            .link-chevron {
+                path:first-child {
+                    transition: fill 0.3s;
+                }
+                path:nth-child(2) {
+                    transition: transform 0.3s;
+                }
+            }
+
+
+            &:hover {
+                .link-text {
+                    background: var(--color-surface-primary);
+                }
+                .link-chevron {
+                    path:first-child {
+                        fill: var(--color-surface-primary);
+                    }
+                    path:nth-child(2) {
+                        transform: translateX(5px);
+                    }
+                }
+            }
+            color: var(--color-text-primary);
+        }
+    }
+}

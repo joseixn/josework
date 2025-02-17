@@ -1,0 +1,41 @@
+<div class="{{classname}} bg-{{conf.background}} type-{{type}} layout-{{conf.layout}}" {{anchor_id}}>
+    <div class="wrapper">
+        <div class="text">
+            <h3>{{heading}}</h3>
+            <h2>{{title}}</h2>
+            <div class="content">{{text}}</div>
+            <div class="ctas">
+                {% for cta in ctas %}
+                    <a href="{{cta.cta.url}}" {% if cta.cta.target %}target="{{cta.cta.target}}"{% endif %} class="cta">{{cta.cta.title}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% if type != 'text' %}
+        <div class="media">
+            {% if conf.hover_mask != 'none' %}
+                <div class="hover-mask mask-{{conf.hover_mask}}">
+                    {% for word in hover_mask_words|split(' ')|slice(0,3) %}
+                        <span>{{word}}</span>
+                    {% endfor %}
+                    <div class="masked-image">
+                        {% if type == 'image' %}
+                            <img src="{{ image.src }}" srcset="{{image.srcset}}" alt="{{ image.alt }}" />
+                        {% elseif type == 'video' %}
+                            <video autoplay loop muted playsinline poster={{video_poster.src}}>
+                                <source src="{{ video.url }}" type="video/mp4">
+                            </video>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+            {% if type == 'image' %}
+                <img src="{{ image.src }}" srcset="{{image.srcset}}" alt="{{ image.alt }}" />
+            {% elseif type == 'video' %}
+                <video autoplay loop muted playsinline poster={{video_poster.src}}>
+                    <source src="{{ video.url }}" type="video/mp4">
+                </video>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>

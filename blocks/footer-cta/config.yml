@@ -1,0 +1,53 @@
+meta:
+  name: tlb/footer-cta
+  title: Footer CTA
+  description: A block that shows a CTA for the footer
+  acf:
+    mode: edit
+  dynamic: true
+  supports:
+    anchor: true
+
+title: Footer CTA - $field_footer_cta_cta
+fields:
+  cta:
+    type: text
+    label: CTA
+  cta_link:
+    type: link
+    label: CTA Link
+  
+  type:
+    label: Media Type
+    type: select
+    default: text
+    choices:
+      image: Image
+      video: Video
+      text: Text Only
+  video:
+    label: Video
+    type: file
+    mime_types: 'mov,mp4'
+    conditional_logic:
+      -
+        - field: field_footer_cta_type
+          operator: ==
+          value: video
+  video_poster:
+    label: Video Poster Image
+    type: image
+    conditional_logic:
+      -
+        - field: field_footer_cta_type
+          operator: ==
+          value: video
+  image:
+    label: Image
+    type: image
+    conditional_logic:
+      -
+        - field: field_footer_cta_type
+          operator: ==
+          value: image
+  

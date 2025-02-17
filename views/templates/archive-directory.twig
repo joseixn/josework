@@ -1,0 +1,31 @@
+{% extends 'layouts/base.twig' %}
+{% set data = fn('tlb_directory_posts', fn('get_query_var', 'filter-directory-category')) %}
+{% set isMap = fn('get_query_var', 'directory-map') == '1' %}
+{% block content %}
+    <div class="filter">
+        <div class="tags">
+            {% for term in fn('tlb_directory_categories') %}
+                <a class="term-{{ term.slug }} taxonomy-{{ term.taxonomy }} {% if term.slug == fn('get_query_var', 'filter-directory-category') %}active{% endif %}" href="{{ term.link }}">{{ term.name }}</a>
+            {% endfor %}
+        </div>
+        <div class="mode-selector">
+            <a href="{{ fn('get_post_type_archive_link', 'directory') }}/map" class="mode {% if isMap %}active{% endif %}">Map</a>
+            <a href="{{ fn('get_post_type_archive_link', 'directory') }}" class="mode {% if not isMap %}active{% endif %}">Grid</a>
+        </div>
+    </div>
+    <div class="posts-holder">
+        {% if isMap %}
+            <div class="map">
+            </div>
+        {% endif %}
+        <div class="posts">
+        {% for post in data %}
+            {% set data = {} %}
+            {% if isMap %}
+                {% set index = loop.index %}
+            {% endif %}
+            {% include ['partials/tease-' ~ post.type ~ '.twig', 'partials/tease.twig'] %}
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

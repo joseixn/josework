@@ -1,0 +1,72 @@
+footer {
+    background: var(--color-surface-highlight);
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-md) 0;
+    .wrapper {
+        max-width: var(--container-width);
+        width: 100%;
+        .first-line {
+            display: flex;
+            position: relative;
+
+            .links {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                > nav > ul {
+                    display: flex;
+                    li {
+                        a {
+                            @include button;
+                            color: var(--color-text-primary);
+                        }
+                    }
+                }
+            
+            }
+            .social-links {
+                margin-left: auto;
+                nav ul {
+                    display: flex;
+                    gap: var(--spacing-xs);
+                    li a{
+                        font-size: 0;
+                        width:31px;
+                        height: 31px;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        display: block;
+                        
+                        &[href*="facebook.com"] {
+                            background-image: var(--icons-facebook);
+                        }
+                        &[href*="x.com"] {
+                            background-image: var(--icons-x);
+                        }
+                        &[href*="instagram.com"] {
+                            background-image: var(--icons-instagram);
+                        }
+                        &[href*="linkedin.com"] {
+                            background-image: var(--icons-linkedin);
+                        }
+                    }
+                }
+            }
+        }
+
+        .bottom {
+            margin-top: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font: var(--type-b3);
+            .legal-links nav ul li a {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

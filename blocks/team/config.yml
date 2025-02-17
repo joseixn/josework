@@ -1,0 +1,59 @@
+meta:
+  name: tlb/team
+  title: Team
+  description: A block that shows team members
+  acf:
+    mode: edit
+  dynamic: true
+  supports:
+    anchor: true
+fields:
+  background:
+    label: Background
+    type: select
+    choices:
+      white: White
+      dark: Dark
+      green: Green
+      off-white: Off-White
+    default_value: white
+  heading:
+    type: text
+    label: Heading
+  title:
+    type: text
+    label: Title
+  intro:
+    type: textarea
+    label: Intro
+  members:
+    type: repeater
+    label: Members
+    layout: row
+    fields:
+      name:
+        type: text
+        label: Name
+      role:
+        type: text
+        label: Role
+      image:
+        type: image
+        label: Image
+      bio:
+        type: textarea
+        label: Bio
+      links:
+        type: repeater
+        label: Links
+        fields:
+          type:
+            type: select
+            label: Type
+            choices:
+              linkedin: LinkedIn
+              x: X
+              website: Website
+          url:
+            type: text
+            label: URL

@@ -1,0 +1,46 @@
+fields:
+  background:
+    label: Background
+    type: select
+    choices:
+      white: White
+      dark: Dark
+      green: Green
+      off-white: Off-White
+    default_value: white
+  sections:
+    min: 1
+    max: 2
+    instructions: Please add two sections for text only. Or one or two sections for media. Or one media and one text
+    fields:
+      type:
+        choices:
+          title: Title
+          text: Text
+          image: Image
+          video: Video
+          cta: null # Unsets this as an option
+      title:
+        type: text
+        label: Title
+        conditional_logic:
+          -
+            - field: field_multi_block_sections_type
+              operator: ==
+              value: title
+      ctas:
+        type: repeater
+        label: CTAs
+        fields:
+          cta:
+            type: link
+            label: CTA
+        conditional_logic:
+          -
+            - field: field_multi_block_sections_type
+              operator: ==
+              value: text
+          -
+            - field: field_multi_block_sections_type
+              operator: ==
+              value: title

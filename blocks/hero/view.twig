@@ -1,0 +1,16 @@
+<div class="{{classname}}" {{anchor_id}}>
+    <div class="wrapper">
+        {% if type == 'video' and video.url %}
+            <div class="media">
+                <video autoplay muted poster="{{video_poster.src}}" alt="{{video_poster.alt}}">
+                    <source src="{{ video.url }}" type="video/mp4">
+                    Sorry! your browser does not support the video tag.
+                </video>
+            </div>
+        {% elseif type == 'image' and image.src %}
+            <div class="media">
+                <img src="{{ image.src }}" srcset="{{image.srcset}}" alt="{{ image.alt }}">
+            </div>
+        {% endif %}
+    </div>
+</div>

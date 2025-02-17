@@ -1,0 +1,25 @@
+<div {{anchor_id}} class="{{classname}}" data-slick-cfg="{{config.slick|json_encode}}" style="background-image: url('{{background_image.src}}');">
+
+    <div class="wrapper">
+        <div class="slick">
+            {% for t in text %}
+                <div class="slide">
+                    {% if t.type == 'text' %}
+                        <div class="text">{{ t.text }}</div>
+                    {% else %}
+                        <div class="quote">
+                            <blockquote>{{ t.quote }}</blockquote>
+                            <cite>
+                                <div class="author-image"><img src="{{ t.quote_author_image.src }}" srcset="{{t.quote_author_image.srcset}}" alt="{{t.quote_author_image.alt}}"></div>
+                                <div class="author-text">
+                                    <div class="author-name">{{ t.quote_author }}</div>
+                                    <div class="author-company">{{ t.quote_company }}</div>
+                                </div>
+                            </cite>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<footer>
+    <div class="wrapper">
+        <div class="first-line">
+            <div class="logo">
+                {% include 'partials/logo-full.twig' %}
+            </div>
+            <div class="links">
+                <nav>
+                    {% include 'partials/menu.twig' with {
+                        items: menu_footer.get_items
+                    } %}
+                </nav>
+            </div>
+            <div class="social-links">
+                <nav>
+                    {% include 'partials/menu.twig' with {
+                        items: menu_footer_social.get_items
+                    } %}
+                </nav>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="legal-links">
+                <nav>
+                    {% include 'partials/menu.twig' with {
+                        items: menu_footer_legal.get_items
+                    } %}
+                </nav>
+            </div>
+            <div class="footer-text">
+                {{options.footer_text}}
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,39 @@
+<div class="{{classname}} bg-{{background}}" {{anchor_id}}>
+    <div class="wrapper">
+        <div class="intro">
+            <h3>{{heading}}</h3>
+            <h2>{{title}}</h2>
+            <p>{{intro}}</p>
+        </div>
+        <div class="team">
+            {% for member in members %}
+                <div class="member">
+                    {% if member.image %}
+                    <div class="media">
+                        <img src="{{ member.image.src }}" srcset="{{member.image.srcset}}" alt="{{ member.name }}">
+                    </div>
+                    {% endif %}
+                    <h4>{{ member.name }}</h4>
+                    <h5>{{ member.role }}</h5>
+                    <p>{{ member.bio }}</p>
+                    <ul>
+                        {% for link in member.links %}
+                            <li ><a class="type-{{link.type}}" href="{{ link.url }}">{{ link.type }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="navigation">
+            <div class="dots">
+                {% for member in members %}
+                    <a href="#">{{ member.name }}</a>
+                {% endfor %}
+            </div>
+            <div class="arrows">
+                <a href="#" class="prev">Previous</a>
+                <a href="#" class="next">Next</a>
+            </div>
+        </div>
+    </div>
+</div>

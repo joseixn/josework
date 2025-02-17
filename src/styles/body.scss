@@ -1,0 +1,46 @@
+body, html {
+    margin:0;
+    padding:0;
+}
+body {
+    
+    --message-height: 0px;
+    &:has(header > .message) {
+        --message-height: 80px;
+    }
+    --body-margin-top: calc(var(--header-height) + var(--header-offset)  + var(--message-height));
+    &:has(.current-menu-parent){
+        --body-margin-top: calc(var(--header-height) + var(--header-offset) + 38px + var(--message-height));
+    }
+    margin-top: var(--body-margin-top);
+    
+    
+    @if $debug-enabled {
+        font-family: 'Wingdings';
+    }
+
+    // Stick footer to bottom of page
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - var(--body-margin-top));
+
+}
+
+body > .skip-link {
+    display: none;
+}
+
+
+// Stick footer to bottom of page
+main {
+    flex-grow: 1;
+}
+
+.screen-reader-text {
+    position: absolute;
+    top: -9999em;
+    left: -9999em;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}

@@ -1,0 +1,39 @@
+{% if show_cta %}
+    {% set tag = 'div' %}
+{% else %}
+    {% set tag = 'a' %}
+{% endif %}
+
+<div class="{{classname}} show-cta-{{show_cta}} bg-{{background}} count-{{items|length}}" {{anchor_id}}>
+    <div class="wrapper">
+        {% if heading or title %}
+            <div class="title">
+                <h3>{{heading}}</h3>
+                <h2>{{title}}</h2>
+            </div>
+        {% endif %}
+        <div class="items">
+            {% for item in items %}
+                <{{tag}} href="{{item.link.url}}" class="item">
+                    {% if item.type == 'video' and item.video.url %}
+                        <div class="media">
+                            <video autoplay muted poster="{{item.video_poster.src}}" alt="{{item.video_poster.alt}}">
+                                <source src="{{ item.video.url }}" type="video/mp4">
+                                Sorry! your browser does not support the video tag.
+                            </video>
+                        </div>
+                    {% elseif item.type == 'image' and item.image.src %}
+                        <div class="media">
+                            <img src="{{ item.image.src }}" srcset="{{item.image.srcset}}" alt="{{ item.image.alt }}">
+                        </div>
+                    {% endif %}
+                    <h3>{{item.title}}</h3>
+                    <p>{{item.text}}</p>
+                    {% if show_cta %}
+                        <a href="{{item.link.url}}" class="cta">{{item.link.title}}</a>
+                    {% endif %}
+                </{{tag}}>
+            {% endfor %}
+        </div>
+    </div>
+</div>

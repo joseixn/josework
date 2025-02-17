@@ -1,0 +1,56 @@
+fields:
+    heading:
+        type: text
+        label: Heading
+    description:
+        type: textarea
+        label: Description
+    cta:
+        type: link
+        label: Call to Action
+    heading_text_direction:
+        type: select
+        label: Heading Text Direction
+        choices:
+            left: Left
+            center: Center
+        default_value: center
+
+    layout:
+        type: select
+        label: Layout
+        choices:
+            default: Default (no featured)
+            two-featured: Two Featured
+            four-featured: Four Featured
+            all-featured: All Featured
+            three-across: Triple Grid
+        default_value: default
+    background:
+        label: Background
+        type: select
+        choices:
+          white: White
+          dark: Dark
+          green: Green
+          off-white: Off-White
+        default_value: white
+
+resolvers:
+  resolved_posts: >
+    if(isset($fields['post_type'])){
+        if($fields['post_type'][0] == 'events'){
+            $fields[$field] = tlb_get_events();
+            // slice
+            $fields[$field] = array_slice($fields[$field], 0, $fields['posts_per_page']);
+        }
+        else {
+            $query = [
+                'post_type' => $fields['post_type'],
+                'posts_per_page' => $fields['posts_per_page'],
+                'orderby' => 'date',
+                'order' => 'DESC',
+            ];
+            $fields[$field] = Timber::get_posts($query);
+        }
+    }
